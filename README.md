@@ -12,7 +12,7 @@ URLs that do not contain any parameters matching the provided patterns are autom
 
 # Install
 1 - Download the project 
-```git clone link```
+```git clone https://github.com/kadhajy/gfreplace.git```
 2 - Download gf-patterns [gf-patterns](https://github.com/1ndianl33t/Gf-Patterns) or write you own json with patterns.
 ```git clone  https://github.com/1ndianl33t/Gf-Patterns.git```
 
