@@ -5,7 +5,7 @@ import sys
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 
-# ---------- utilidades de leitura ----------
+#  utilidades de leitura 
 def load_urls(file_path):
     """Lê URLs de um arquivo ou stdin (se ‘-’)."""
     src = sys.stdin if file_path == "-" else open(file_path, "r", encoding="utf-8")
@@ -20,7 +20,7 @@ def load_patterns(json_path):
     return [p.strip(" =") for p in cfg.get("patterns", [])]
 
 
-# ---------- matching ----------
+#  matching 
 def match_key(key, patterns, case_insensitive):
     """Retorna True se key casa com qualquer pattern (==, prefixo, sufixo)."""
     for pattern in patterns:
@@ -30,8 +30,7 @@ def match_key(key, patterns, case_insensitive):
             return True
     return False
 
-
-# ---------- substituição ----------
+ # substituição 
 def replace_query_params(url, patterns, case_insensitive, new_value):
     parsed = urlparse(url)
     query = parse_qs(parsed.query, keep_blank_values=True)
@@ -67,7 +66,7 @@ def replace_query_params(url, patterns, case_insensitive, new_value):
     return urlunparse(parsed._replace(query=new_query))
 
 
-# ---------- CLI ----------
+#  CLI 
 def main():
     parser = argparse.ArgumentParser(
         description="query-string replacement driven by gf-patterns"
@@ -85,8 +84,8 @@ def main():
     )
     parser.add_argument(
         "-v", "--value",
-        default="REPLACED",
-        help="value to inject (default: 'REPLACED')",
+        default="FUZZ",
+        help="value to inject (default: 'FUZZ')",
     )
     parser.add_argument(
         "-o", "--output",
@@ -109,7 +108,7 @@ def main():
         if new_url:
             transformed.append(new_url)
 
-    # saída
+    # out
     if args.output:
         with open(args.output, "w", encoding="utf-8") as f:
             f.write("\n".join(transformed) + ("\n" if transformed else ""))
